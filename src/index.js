@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Create and append the background image container
     const backgroundImageContainer = document.createElement('div');
     backgroundImageContainer.classList.add('background-image');
+    backgroundImageContainer.style.backgroundImage = "url('https://wallpaperaccess.com/full/9129421.png')";
+    backgroundImageContainer.style.backgroundSize = 'cover';
+    backgroundImageContainer.style.backgroundPosition = 'left';
+    backgroundImageContainer.style.position = 'fixed';
+    backgroundImageContainer.style.top = '0';
+    backgroundImageContainer.style.left = '0';
+    backgroundImageContainer.style.width = '100%';
+    backgroundImageContainer.style.height = '100%';
+    backgroundImageContainer.style.zIndex = '-1';
+
     contentDiv.appendChild(backgroundImageContainer);
 
     // Create and append the navigation
@@ -46,3 +56,5 @@ document.addEventListener('DOMContentLoaded', function () {
     footer.appendChild(span);
     contentDiv.appendChild(footer);
 });
+
+
