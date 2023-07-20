@@ -2,6 +2,11 @@ body {
     font-family: Arial;
 }
 
+#content {
+    display: flex;
+    flex-direction: column;
+}
+
 /* Style the tab */
 .tab {
     overflow: hidden;
