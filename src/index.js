@@ -1,60 +1,66 @@
 import './style.css';
 
 document.addEventListener('DOMContentLoaded', function () {
-    const contentDiv = document.getElementById('content');
+  const contentDiv = document.getElementById('content');
 
-    // Create and append the background image container
-    const backgroundImageContainer = document.createElement('div');
-    backgroundImageContainer.classList.add('background-image');
-    backgroundImageContainer.style.backgroundImage = "url('https://wallpaperaccess.com/full/9129421.png')";
-    backgroundImageContainer.style.backgroundSize = 'cover';
-    backgroundImageContainer.style.backgroundPosition = 'left';
-    backgroundImageContainer.style.position = 'fixed';
-    backgroundImageContainer.style.top = '0';
-    backgroundImageContainer.style.left = '0';
-    backgroundImageContainer.style.width = '100%';
-    backgroundImageContainer.style.height = '100%';
-    backgroundImageContainer.style.zIndex = '-1';
+  // Create and append other elements dynamically
+  const h2 = document.createElement('h2');
+  h2.textContent = 'Tabs';
+  contentDiv.appendChild(h2);
 
-    contentDiv.appendChild(backgroundImageContainer);
+  const p = document.createElement('p');
+  p.textContent = 'Click on the buttons inside the tabbed menu:';
+  contentDiv.appendChild(p);
 
-    // Create and append the navigation
-    const nav = document.createElement('nav');
-    const ul = document.createElement('ul');
-    const navItems = ['Home', 'Menu', 'Contact'];
+  const tabDiv = document.createElement('div');
+  tabDiv.classList.add('tab');
+  contentDiv.appendChild(tabDiv);
 
-    navItems.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        ul.appendChild(li);
-    });
+  const cities = ['London', 'Paris', 'Tokyo'];
 
-    nav.appendChild(ul);
-    contentDiv.appendChild(nav);
+  cities.forEach(city => {
+    const button = document.createElement('button');
+    button.textContent = city;
+    button.classList.add('tablinks');
+    button.addEventListener('click', (event) => openCity(event, city));
+    tabDiv.appendChild(button);
+  });
 
-    // Create and append the main content
-    const main = document.createElement('main');
-    const mainContent = document.createElement('div');
-    mainContent.classList.add('main-content');
+  const londonDiv = createTabContent('London', 'London is the capital city of England.');
+  const parisDiv = createTabContent('Paris', 'Paris is the capital of France.');
+  const tokyoDiv = createTabContent('Tokyo', 'Tokyo is the capital of Japan.');
 
-    const h3 = document.createElement('h3');
-    h3.textContent = 'About';
-    mainContent.appendChild(h3);
-
-    const description = document.createElement('div');
-    description.classList.add('description');
-    description.textContent = 'Only those with an "in" can eat at The Inn!';
-    mainContent.appendChild(description);
-
-    main.appendChild(mainContent);
-    contentDiv.appendChild(main);
-
-    // Create and append the footer
-    const footer = document.createElement('footer');
-    const span = document.createElement('span');
-    span.textContent = 'Created by Immanuel Monroe';
-    footer.appendChild(span);
-    contentDiv.appendChild(footer);
+  contentDiv.appendChild(londonDiv);
+  contentDiv.appendChild(parisDiv);
+  contentDiv.appendChild(tokyoDiv);
 });
 
+function createTabContent(city, description) {
+  const tabcontentDiv = document.createElement('div');
+  tabcontentDiv.id = city;
+  tabcontentDiv.classList.add('tabcontent');
 
+  const h3 = document.createElement('h3');
+  h3.textContent = city;
+  tabcontentDiv.appendChild(h3);
+
+  const p = document.createElement('p');
+  p.textContent = description;
+  tabcontentDiv.appendChild(p);
+
+  return tabcontentDiv;
+}
+
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
